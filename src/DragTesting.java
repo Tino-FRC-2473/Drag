@@ -1,13 +1,20 @@
+import java.util.List;
+
 import javafx.application.*;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -36,6 +43,17 @@ public class DragTesting extends Application{
 		c1 = new StackPane();
 		Circle c = new Circle(200, 200, 50, Color.DARKGRAY);
 		c1.getChildren().add(c);
+		
+		VBox vb = new VBox();
+		  /*vb.setStyle("-fx-padding: 10;" + 
+                  "-fx-border-style: solid inside;" + 
+                  "-fx-border-width: 2;" +
+                  "-fx-border-insets: 5;" + 
+                  "-fx-border-radius: 5;" + 
+                  "-fx-border-color: blue;");*/
+		  vb.setAlignment(Pos.BASELINE_CENTER);
+		
+		c1.getChildren().add(vb);
 		c1.setTranslateX(100);
 		c1.setTranslateY(100);
 		
@@ -103,11 +121,12 @@ public class DragTesting extends Application{
 				//if(Math.abs(c1.getTranslateX() - (stack.getWidth() / 2) - stack.getTranslateX()) < c1.getWidth() / 2 + (stack.getWidth() / 2)
 				//		&& Math.abs(c1.getTranslateY() - (stack.getHeight() / 2) - stack.getTranslateY()) < c1.getHeight() / 2 + (stack.getHeight() / 2)){		
 				if(stack.intersects(c1.getBoundsInLocal()))	{
-					if(!c1.getChildren().contains(t)){
-						if(c1.getChildren().size() > 1) c1.getChildren().remove(c1.getChildren().size() - 1);
+					
+						((VBox) c1.getChildren().get(1)).getChildren().add(t);
 						root.getChildren().removeAll(stack);
-						c1.getChildren().add(t);
-					} 
+						
+						Circle c = (Circle) c1.getChildren().get(0);
+						c.setRadius(c.getRadius() + 10);
 				}
 			
 			}
@@ -119,6 +138,8 @@ public class DragTesting extends Application{
 	
 	
 }
+
+
 /*
 stack.toBack();
 if(e.getSource().getClass().equals(StackPane.class) && stack.intersects(((Node) e.getSource()).getBoundsInLocal()))	{
