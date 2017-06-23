@@ -1,11 +1,7 @@
-import java.util.List;
-
 import javafx.application.*;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -14,12 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class DragTesting extends Application{
-	StackPane c1;
+	StackPane c1; 
 	double sceneX;
 	double sceneY;
 	double translateX;
@@ -111,17 +106,15 @@ public class DragTesting extends Application{
 				if(stack.getTranslateY() < 0) stack.setTranslateY(0);
 				if(stack.getTranslateY() + stack.getHeight() > scene.getHeight()) stack.setTranslateY(scene.getHeight() - stack.getHeight());
 			}
-			
 		});
 		
 		stack.setOnMouseReleased(new EventHandler<MouseEvent>(){
 			
 			@Override
 			public void handle(MouseEvent e){
-				//if(Math.abs(c1.getTranslateX() - (stack.getWidth() / 2) - stack.getTranslateX()) < c1.getWidth() / 2 + (stack.getWidth() / 2)
-				//		&& Math.abs(c1.getTranslateY() - (stack.getHeight() / 2) - stack.getTranslateY()) < c1.getHeight() / 2 + (stack.getHeight() / 2)){		
-				if(stack.intersects(c1.getBoundsInLocal()))	{
-					
+				//if(stack.intersects(c1.getBoundsInLocal()))	{
+				if(Math.abs(c1.getTranslateX() - (stack.getWidth() / 2) - stack.getTranslateX()) < c1.getWidth() / 2 + (stack.getWidth() / 2)
+						&& Math.abs(c1.getTranslateY() - (stack.getHeight() / 2) - stack.getTranslateY()) < c1.getHeight() / 2 + (stack.getHeight() / 2)){	
 						((VBox) c1.getChildren().get(1)).getChildren().add(t);
 						root.getChildren().removeAll(stack);
 						
@@ -140,18 +133,4 @@ public class DragTesting extends Application{
 }
 
 
-/*
-stack.toBack();
-if(e.getSource().getClass().equals(StackPane.class) && stack.intersects(((Node) e.getSource()).getBoundsInLocal()))	{
-StackPane sp = (StackPane) 
-System.out.println("Hi");
-if(sp.getChildren().contains(Circle.class)){
-	
-	if(!sp.getChildren().contains(t)){
-		if(sp.getChildren().contains(Text.class)) sp.getChildren().remove(Text.class);
-		root.getChildren().removeAll(stack);
-		sp.getChildren().add(t);
-	} 
-}
-}
-*/
+
